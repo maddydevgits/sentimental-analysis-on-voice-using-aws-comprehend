@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+              <h1>Sentimental Analysis on voice using AWS Comprehend</h1>      
+              <p>This project deals with the sentimental analysis on voice input by user</p>
+            </div>
+            <h3>Step 1 - Record your voice</h3>
+            <br>
+            <div style="max-width: 28em;">
+
+                <p>Convert recorded audio to wav:</p>
+                
+                <select id="encodingTypeSelect">
+                  <option value="wav">Waveform Audio (.wav)</option>
+                </select> <br/> <br/>
+                
+                <div id="controls">
+                    <button id="recordButton" class="btn-danger">Record</button>
+                    <button id="stopButton" disabled>Stop</button>
+                </div>
+
+                <div id="formats"></div> <br/>
+
+                <pre>Log</pre>
+                <pre id="log"></pre>
+                <br>
+                
+                <h3>Step 2 - Download your record </h3> 
+                
+                <ol id="recordingsList"></ol>
+            </div>
+        
+            <div id="speechContainer">
+                <br>
+                <h3>Step 3 - Upload your .wav file</h3> 
+        
+                <form method="post" enctype="multipart/form-data">
+                    <input type="file" name="file"/>
+                    <br>
+        
+                    <br>
+                    <h3>Step 4 - Convert audio to text </h3> 
+                    <input type="submit" id="submitButton" value="Transcribe"/>
+                </form>
+                
+                
+                
+                {% if transcript != "" %}
+                    <div id="speechTranscriptContainer">
+                        <h1>Results</h1>
+                        <p id="speechText">{{ transcript }}</p>
+                    </div>
+                {% endif %}
+                
+            
+          </div>
+          <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+    <script src="{{ url_for('static', filename='js/WebAudioRecorder.min.js') }}" ></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}" ></script>
+    </body>
+</html>
